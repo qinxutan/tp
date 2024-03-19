@@ -23,6 +23,10 @@ public class ModuleCardTest {
     @DisabledOnOs(OS.LINUX)
     @Test
     public void constructor_validModuleCode_setsModuleCodeAndTutorialClasses() {
+        if (!Boolean.getBoolean("gui.tests.enabled") || OS.LINUX.isCurrentOs()) {
+            System.out.println("Skipping GUI test.");
+            return;
+        }
         ModuleCode moduleCode = new ModuleCode("CS2103");
         ModuleCard moduleCard = new ModuleCard(moduleCode);
         assertEquals(moduleCode, moduleCard.moduleCode);

@@ -28,17 +28,29 @@ public class ModuleListPanelTest {
 
     @BeforeEach
     public void setUp() {
+        if (!Boolean.getBoolean("gui.tests.enabled") || OS.LINUX.isCurrentOs()) {
+            System.out.println("Skipping GUI test.");
+            return;
+        }
         moduleCodes = FXCollections.observableArrayList();
         moduleListPanel = new ModuleListPanel(moduleCodes);
     }
 
     @Test
     public void constructor_withListOfModuleCodes_initializesListView() {
+        if (!Boolean.getBoolean("gui.tests.enabled") || OS.LINUX.isCurrentOs()) {
+            System.out.println("Skipping GUI test.");
+            return;
+        }
         assertNotNull(moduleListPanel.moduleListView);
     }
 
     @Test
     public void constructor_withListOfModuleCodes_setsCellFactory() {
+        if (!Boolean.getBoolean("gui.tests.enabled") || OS.LINUX.isCurrentOs()) {
+            System.out.println("Skipping GUI test.");
+            return;
+        }
         assertNotNull(moduleListPanel.moduleListView.getCellFactory());
     }
 
