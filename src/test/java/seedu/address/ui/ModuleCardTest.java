@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 
+import javafx.embed.swing.JFXPanel;
 import seedu.address.model.module.ModuleCode;
 
 public class ModuleCardTest {
@@ -15,7 +16,7 @@ public class ModuleCardTest {
     public static void initializeJavaFX() {
         // Initialize JavaFX only if not on Linux
         if (!OS.LINUX.isCurrentOs()) {
-            javafx.embed.swing.JFXPanel jfxPanel = new javafx.embed.swing.JFXPanel();
+            new JFXPanel();
         }
     }
 

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.condition.OS;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.JFXPanel;
 import seedu.address.model.module.ModuleCode;
 
 public class ModuleListPanelTest {
@@ -21,7 +22,7 @@ public class ModuleListPanelTest {
     public static void initializeJavaFX() {
         // Initialize JavaFX only if not on Linux
         if (!OS.LINUX.isCurrentOs()) {
-            javafx.embed.swing.JFXPanel jfxPanel = new javafx.embed.swing.JFXPanel();
+            new JFXPanel();
         }
     }
 
@@ -44,8 +45,8 @@ public class ModuleListPanelTest {
     @Test
     public void constructor_withListOfModuleCodes_displaysCorrectModuleCards() {
         // Disable GUI testing on Linux
-        if (System.getProperty("os.name").toLowerCase().contains("linux")) {
-            System.out.println("Skipping GUI test on Linux.");
+        if (!Boolean.getBoolean("gui.tests.enabled") || OS.LINUX.isCurrentOs()) {
+            System.out.println("Skipping GUI test.");
             return;
         }
 
