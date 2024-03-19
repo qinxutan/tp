@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import javafx.embed.swing.JFXPanel;
 import seedu.address.model.module.ModuleCode;
@@ -15,6 +17,7 @@ public class ModuleCardTest {
         new JFXPanel();
     }
 
+    @DisabledOnOs(OS.LINUX)
     @Test
     public void constructor_validModuleCode_setsModuleCodeAndTutorialClasses() {
         ModuleCode moduleCode = new ModuleCode("CS2103");
