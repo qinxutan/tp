@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.OS;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.JFXPanel;
 import seedu.address.model.module.ModuleCode;
 
 public class ModuleListPanelTest {
@@ -18,8 +18,11 @@ public class ModuleListPanelTest {
     private ObservableList<ModuleCode> moduleCodes;
 
     @BeforeAll
-    public static void initToolkit() {
-        new JFXPanel(); // Initializes the JavaFX Toolkit
+    public static void initializeJavaFX() {
+        // Initialize JavaFX only if not on Linux
+        if (!OS.LINUX.isCurrentOs()) {
+            javafx.embed.swing.JFXPanel jfxPanel = new javafx.embed.swing.JFXPanel();
+        }
     }
 
     @BeforeEach
