@@ -214,8 +214,8 @@ public class MainWindow extends UiPart<Stage> {
     public static boolean useModuleView(String commandText) {
         String commandWord = commandText.split(" ")[0];
         return commandWord.equals(ListClassesCommand.COMMAND_WORD)
-                || commandWord.equals(AddClassCommand.COMMAND_WORD)
-                || commandWord.equals(DeleteClassCommand.COMMAND_WORD);
+            || commandWord.equals(AddClassCommand.COMMAND_WORD)
+            || commandWord.equals(DeleteClassCommand.COMMAND_WORD);
     }
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
