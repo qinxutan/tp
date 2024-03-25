@@ -54,7 +54,7 @@ public class TutorialClass {
     /**
      * A constructor for TutorialClass. Creates a tutorial class with students.
      * @param tutorialClass to be added
-     * @param students in the tutorial class
+     * @param students      in the tutorial class
      */
     public TutorialClass(String tutorialClass, ArrayList<Person> students) {
         requireAllNonNull(tutorialClass);
@@ -112,6 +112,7 @@ public class TutorialClass {
 
     /**
      * Adds a student to the tutorial class.
+     * @param student
      */
     public void addStudent(Person student) {
         students.add(student);
@@ -119,7 +120,7 @@ public class TutorialClass {
 
     /**
      * Removes a student from the tutorial class if it exists.
-     *
+     * @param student
      * @return true if the student was removed
      */
     public boolean deleteStudent(Person student) {
@@ -141,7 +142,6 @@ public class TutorialClass {
     public ArrayList<TutorialTeam> getTeams() {
         return this.teams;
     }
-
     /**
      * Adds a team to the tutorial class.
      * @param team
@@ -157,6 +157,7 @@ public class TutorialClass {
     public boolean hasTeam(TutorialTeam team) {
         return teams.contains(team);
     }
+
     @Override
     public String toString() {
         return tutorialName;

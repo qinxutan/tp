@@ -25,11 +25,11 @@ public class AddTeamCommand extends Command {
     public static final String COMMAND_WORD = "/add_team";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Create a team with a name and an optional size, assigned to a particular tutorial class\n"
-        + "Parameters: " + PREFIX_MODULECODE + "MODULE_CODE "
-        + PREFIX_TUTORIALCLASS + "TUTORIAL_CLASS " + PREFIX_NAME + "TEAM_NAME " + PREFIX_TEAM_SIZE + "TEAM_SIZE\n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_MODULECODE + "CS2103T "
-        + PREFIX_TUTORIALCLASS + "T09 " + PREFIX_NAME + "Team 1 " + PREFIX_TEAM_SIZE + "5";
+            + ": Create a team with a name and an optional size, assigned to a particular tutorial class\n"
+            + "Parameters: " + PREFIX_MODULECODE + "MODULE_CODE "
+            + PREFIX_TUTORIALCLASS + "TUTORIAL_CLASS " + PREFIX_NAME + "TEAM_NAME " + PREFIX_TEAM_SIZE + "TEAM_SIZE\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_MODULECODE + "CS2103T "
+            + PREFIX_TUTORIALCLASS + "T09 " + PREFIX_NAME + "Team 1 " + PREFIX_TEAM_SIZE + "5";
 
     private final ModuleCode module;
     private final TutorialClass tutorialClass;
@@ -100,7 +100,7 @@ public class AddTeamCommand extends Command {
         }
         if (existingTutorialClass == null) {
             throw new CommandException(
-                String.format(ModuleMessages.MESSAGE_TUTORIAL_DOES_NOT_BELONG_TO_MODULE, tutorialClass, module));
+                    String.format(ModuleMessages.MESSAGE_TUTORIAL_DOES_NOT_BELONG_TO_MODULE, tutorialClass, module));
         }
         return new ModuleTutorialPair(existingModule, existingTutorialClass);
     }
@@ -123,7 +123,7 @@ public class AddTeamCommand extends Command {
      */
     private String generateSuccessMessage(ModuleCode module, TutorialClass tutorialString, String teamName) {
         return String.format(MESSAGE_ADD_TEAM_SUCCESS_WITHOUT_SIZE, teamName, module,
-            tutorialString);
+                tutorialString);
     }
 
     /**

@@ -39,6 +39,7 @@ public class JsonAdaptedTutorialClass {
      */
     public JsonAdaptedTutorialClass(TutorialClass source) {
         this.tutorialName = source.tutorialName;
+        this.teams = source.getTeams().stream().map(JsonAdaptedTutorialTeam::new).collect(Collectors.toList());
         this.students = source.getStudents().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList());
         this.teams = source.getTeams().stream().map(JsonAdaptedTutorialTeam::new).collect(Collectors.toList());
     }

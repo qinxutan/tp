@@ -26,8 +26,13 @@ public class JsonAdaptedTutorialTeam {
      */
     @JsonCreator
     public JsonAdaptedTutorialTeam(@JsonProperty("teamName") String teamName,
+<<<<<<< HEAD
                                    @JsonProperty("teamSize") int teamSize,
                                    @JsonProperty("students") List<JsonAdaptedPerson> students) {
+=======
+            @JsonProperty("teamSize") int teamSize,
+            @JsonProperty("students") List<JsonAdaptedPerson> students) {
+>>>>>>> origin/Ui-update
         this.teamName = teamName;
         this.students = students != null ? new ArrayList<>(students) : new ArrayList<>();
         this.teamSize = teamSize;
@@ -85,6 +90,10 @@ public class JsonAdaptedTutorialTeam {
 
         JsonAdaptedTutorialTeam otherTutorialTeam = (JsonAdaptedTutorialTeam) other;
         return teamName.equals(otherTutorialTeam.teamName) && students.equals(otherTutorialTeam.students)
+<<<<<<< HEAD
             && teamSize == otherTutorialTeam.teamSize;
+=======
+                && teamSize == otherTutorialTeam.teamSize;
+>>>>>>> origin/Ui-update
     }
 }

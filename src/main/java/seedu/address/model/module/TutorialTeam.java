@@ -10,13 +10,15 @@ import seedu.address.model.person.Person;
 /**
  * Represents a Module's tutorial team.
  * Guarantees: immutable; is valid as declared in
+ * {@link #isValidTeamName(String)}
+ *
  */
 public class TutorialTeam {
 
     public static final String MESSAGE_CONSTRAINTS = "Please enter a valid tutorial team name "
-        + "eg. Team 1, and it should not be blank";
+            + "eg. Team 1, and it should not be blank";
     public static final String MESSAGE_NAME_CONSTRAINTS = "Team names should only contain alphanumeric "
-        + "characters and spaces, and it should not be blank";
+            + "characters and spaces, and it should not be blank";
     public static final String MESSAGE_SIZE_CONSTRAINTS = "Team size should be a positive integer";
 
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
