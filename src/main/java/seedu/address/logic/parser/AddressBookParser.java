@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.AddTeamCommand;
+import seedu.address.logic.commands.AllocateStudentToTeamCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteClassCommand;
@@ -98,10 +100,15 @@ public class AddressBookParser {
         case AddStudentToClassCommand.COMMAND_WORD:
             return new AddStudentToClassCommandParser().parse(arguments);
 
+        case AddTeamCommand.COMMAND_WORD:
+            return new AddTeamCommandParser().parse(arguments);
+
+        case AllocateStudentToTeamCommand.COMMAND_WORD:
+            return new AllocateStudentToTeamCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

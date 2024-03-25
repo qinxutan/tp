@@ -10,8 +10,10 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.ModuleMessages;
+import seedu.address.logic.messages.TutorialClassMessages;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.TutorialClass;
+import seedu.address.model.module.TutorialTeam;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -185,6 +187,66 @@ public class AddressBook implements ReadOnlyAddressBook {
         tutorialClassInList.addStudent(person);
     }
 
+    /**
+     * Adds a person to the students list of a specific team within a
+     * tutorial class of a module.
+     */
+    public void addPersonToTeam(Person person, ModuleCode module, TutorialClass tutorialClass, TutorialTeam teamName)
+            throws CommandException {
+        requireNonNull(person);
+        requireNonNull(module);
+        requireNonNull(tutorialClass);
+        requireNonNull(teamName);
+
+        ModuleCode moduleInList = findModuleFromList(module);
+        if (moduleInList == null) {
+            throw new IllegalArgumentException("Module does not exist in the address book.");
+        }
+        TutorialClass tutorialInList = findTutorialClassFromList(tutorialClass, moduleInList);
+        if (tutorialInList == null) {
+            throw new IllegalArgumentException("Tutorial class does not exist in the address book.");
+        }
+        TutorialTeam team = tutorialInList.getTeams().stream()
+            .filter(t -> t.getTeamName().equals(teamName.getTeamName()))
+            .findFirst()
+            .orElse(null);
+
+        if (team.hasStudent(person)) {
+            throw new CommandException("Person is already in the team.");
+        }
+        team.addStudent(person);
+    }
+
+    /**
+     * Finds or creates a tutorial team within the specified tutorial class.
+     * If the team doesn't exist, a new one will be created.
+     */
+    public TutorialTeam findOrCreateTeam(ModuleCode moduleCode, TutorialClass tutorialClass, TutorialTeam teamName)
+            throws CommandException {
+        requireNonNull(moduleCode);
+        requireNonNull(tutorialClass);
+
+        ModuleCode moduleInList = findModuleFromList(moduleCode);
+        if (moduleInList == null) {
+            throw new CommandException(String.format(ModuleMessages.MESSAGE_MODULE_NOT_FOUND, moduleCode));
+        }
+
+        TutorialClass tutorialInList = findTutorialClassFromList(tutorialClass, moduleInList);
+        if (tutorialInList == null) {
+            throw new IllegalArgumentException(String.format(TutorialClassMessages.MESSAGE_TUTORIAL_CLASS_NOT_FOUND,
+                tutorialClass));
+        }
+
+        TutorialTeam team = tutorialInList.getTeams().stream()
+            .filter(t -> t.getTeamName().equals(teamName.getTeamName()))
+            .findFirst()
+            .orElse(null);
+
+        if (team == null) {
+            tutorialClass.addTeam(team);
+        }
+        return team;
+    }
     /**
      * Replaces the given person {@code target} in the list with
      * {@code editedPerson}.

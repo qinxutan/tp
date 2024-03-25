@@ -5,8 +5,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.TutorialClass;
+import seedu.address.model.module.TutorialTeam;
 import seedu.address.model.person.Person;
 
 /**
@@ -128,5 +130,8 @@ public interface Model {
      * Search for person by a given {@code predicate}.
      */
     Person searchPersonByPredicate(Predicate<Person> predicate);
+    void addPersonToTeam(Person person, ModuleCode module, TutorialClass tutorialClass, TutorialTeam teamName)
+            throws CommandException;
 
+    TutorialTeam findOrCreateTeam(TutorialClass tutorialClass, ModuleCode moduleCode, TutorialTeam tutorialTeam);
 }

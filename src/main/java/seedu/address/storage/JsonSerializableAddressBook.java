@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.TutorialTeam;
 import seedu.address.model.person.Person;
 
 /**
@@ -111,5 +112,50 @@ class JsonSerializableAddressBook {
             throw new IllegalValueException("Module containing tutorial class '" + tutorialName + "' not found.");
         }
     }
+
+    /**
+     * Adds a person to a team in a specific tutorial class within a module.
+     * @param moduleName   The name of the module containing the tutorial class.
+     * @param tutorialName The name of the tutorial class containing the team.
+     * @param teamName     The name of the team to which the person will be added.
+     * @param person       The person to be added to the team.
+     * @throws IllegalValueException if the module, tutorial class, or team does not exist in the address book.
+     */
+    public void addPersonToTeam(String moduleName, String tutorialName, String teamName, Person person)
+            throws IllegalValueException {
+        // Find the module that contains the specified tutorial class
+        Optional<JsonAdaptedModule> moduleOptional = modules.stream()
+            .filter(moduleCode -> moduleCode.getModuleName().equals(moduleName))
+            .findFirst();
+
+        if (moduleOptional.isPresent()) {
+            JsonAdaptedModule module = moduleOptional.get();
+            // Find the tutorial class with the specified name
+            Optional<JsonAdaptedTutorialClass> tutorialOptional = module.getTutorialClasses().stream()
+                .filter(tutorial -> tutorial.getTutorialName().equals(tutorialName))
+                .findFirst();
+
+            if (tutorialOptional.isPresent()) {
+                JsonAdaptedTutorialClass tutorialClass = tutorialOptional.get();
+                // Find the team with the specified name
+                Optional<JsonAdaptedTutorialTeam> teamOptional = tutorialClass.getTeams().stream()
+                    .filter(team -> team.getTeamName().equals(teamName))
+                    .findFirst();
+
+                if (teamOptional.isPresent()) {
+                    JsonAdaptedTutorialTeam team = teamOptional.get();
+                    // Add the person to the students list of the team
+                    team.getStudents().add(new JsonAdaptedPerson(person));
+                } else {
+                    throw new IllegalValueException("Team '" + teamName + "' not found in tutorial class.");
+                }
+            } else {
+                throw new IllegalValueException("Tutorial class '" + tutorialName + "' not found in module.");
+            }
+        } else {
+            throw new IllegalValueException("Module containing tutorial class '" + tutorialName + "' not found.");
+        }
+    }
+
 
 }

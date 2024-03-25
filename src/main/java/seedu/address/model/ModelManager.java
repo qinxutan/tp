@@ -11,8 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.TutorialClass;
+import seedu.address.model.module.TutorialTeam;
 import seedu.address.model.person.Person;
 
 
@@ -140,6 +142,21 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+    @Override
+    public void addPersonToTeam(Person person, ModuleCode module,
+                                TutorialClass tutorialClass, TutorialTeam teamName) throws CommandException {
+        addressBook.addPersonToTeam(person, module, tutorialClass, teamName);
+    }
+
+    @Override
+    public TutorialTeam findOrCreateTeam(TutorialClass tutorialClass, ModuleCode moduleCode,
+                                                 TutorialTeam tutorialTeam) {
+        try {
+            return addressBook.findOrCreateTeam(moduleCode, tutorialClass, tutorialTeam);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
