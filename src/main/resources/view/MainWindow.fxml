@@ -23,7 +23,8 @@
                 <URL value="@DarkTheme.css" />
                 <URL value="@Extensions.css" />
             </stylesheets>
-            <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171"
+            <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                        xmlns="http://javafx.com/javafx/8.0.171"
                         xmlns:fx="http://javafx.com/fxml/1">
                         <top>
                             <MenuBar fx:id="menuBar" VBox.vgrow="ALWAYS">
@@ -40,7 +41,7 @@
                                 <items>
                                     <!-- Add a new VBox for the module list panel -->
                                     <VBox fx:id="moduleList" spacing="5"
-                                          xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+                                          xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS">
                                         <padding>
                                             <Insets top="10" right="10" bottom="10" left="10" />
                                         </padding>
@@ -48,7 +49,7 @@
                                         <StackPane fx:id="moduleListPanelPlaceholder"/>
                                     </VBox>
                                     <VBox fx:id="tutoriallist" spacing="5"
-                                          xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+                                          xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS">
                                         <padding>
                                             <Insets top="10" right="10" bottom="10" left="10" />
                                         </padding>
@@ -56,7 +57,7 @@
                                         <StackPane fx:id="tutorialListPanelPlaceholder"/>
                                     </VBox>
                                     <VBox fx:id="personList" spacing="5"
-                                          xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+                                          xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS">
                                         <padding>
                                             <Insets top="10" right="10" bottom="10" left="10" />
                                         </padding>
