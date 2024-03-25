@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
@@ -10,10 +9,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.layout.BorderPane?>
-
 <?import javafx.scene.layout.HBox?>
+
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="Address App" minWidth="0" minHeight="0" onCloseRequest="#handleExit">
     <icons>
@@ -28,68 +26,67 @@
             <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                         xmlns="http://javafx.com/javafx/8.0.171"
                         xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
-                        <top>
-                            <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-                                <Menu mnemonicParsing="false" text="File">
-                                    <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
-                                </Menu>
-                                <Menu mnemonicParsing="false" text="Help">
-                                    <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-                                </Menu>
-                            </MenuBar>
-                        </top>
-                        <center>
-                            <SplitPane dividerPositions="0.33, 0.67"  HBox.hgrow="ALWAYS" prefHeight="-1" prefWidth="-1">
-                                <items>
-                                    <HBox maxHeight="Infinity" prefHeight="-Infinity" maxWidth="Infinity" prefWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171"
-                                          xmlns:fx="http://javafx.com/fxml/1">
-                                        <children>
-                                            <VBox fx:id="moduleList" spacing="5"
-                                                  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
-                                                <padding>
-                                                    <Insets top="10" right="10" bottom="10" left="10" />
-                                                </padding>
-                                                <StackPane fx:id="moduleListPanelPlaceholder" maxHeight="Infinity" prefWidth="-Infinity" VBox.vgrow="ALWAYS"/>
-                                            </VBox>
-                                        </children>
-                                    </HBox>
-                                    <HBox maxHeight="Infinity" prefHeight="-Infinity" maxWidth="Infinity" prefWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171"
-                                          xmlns:fx="http://javafx.com/fxml/1">
-                                        <children>
-                                            <VBox fx:id="tutoriallist" spacing="5"
-                                                  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
-                                                <padding>
-                                                    <Insets top="10" right="10" bottom="10" left="10" />
-                                                </padding>
-                                                <StackPane fx:id="tutorialListPanelPlaceholder" maxHeight="Infinity" prefWidth="-Infinity" VBox.vgrow="ALWAYS"/>
-                                            </VBox>
-                                        </children>
-                                    </HBox>
-                                    <HBox maxHeight="Infinity" prefHeight="-Infinity" maxWidth="Infinity" prefWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171"
-                                          xmlns:fx="http://javafx.com/fxml/1">
-                                        <children>
-                                            <VBox fx:id="personList" spacing="5"
-                                                  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
-                                                <padding>
-                                                    <Insets top="10" right="10" bottom="10" left="10" />
-                                                </padding>
-                                                <StackPane fx:id="personListPanelPlaceholder" maxHeight="Infinity" prefWidth="-Infinity" VBox.vgrow="ALWAYS"/>
-                                            </VBox>
-                                        </children>
-                                    </HBox>
-                                </items>
-                            </SplitPane>
-
-                        </center>
-                        <bottom>
-                            <VBox prefHeight="111.0" prefWidth="604.0" BorderPane.alignment="CENTER">
+                <top>
+                    <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+                        <Menu mnemonicParsing="false" text="File">
+                            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                        </Menu>
+                    </MenuBar>
+                </top>
+                <center>
+                    <SplitPane dividerPositions="0.33, 0.67"  HBox.hgrow="ALWAYS" prefHeight="-1" prefWidth="-1">
+                        <items>
+                            <HBox maxHeight="Infinity" prefHeight="-Infinity" maxWidth="Infinity" prefWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171"
+                                  xmlns:fx="http://javafx.com/fxml/1">
                                 <children>
-                                    <StackPane fx:id="resultDisplayPlaceholder" minHeight="140" prefHeight="140.0"
-                                               prefWidth="200.0" VBox.vgrow="NEVER"/>
-                                    <StackPane fx:id="commandBoxPlaceholder" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="NEVER"/>
+                                    <VBox fx:id="moduleList" spacing="5"
+                                          xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
+                                        <padding>
+                                            <Insets top="10" right="10" bottom="10" left="10" />
+                                        </padding>
+                                        <StackPane fx:id="moduleListPanelPlaceholder" maxHeight="Infinity" prefWidth="-Infinity" VBox.vgrow="ALWAYS"/>
+                                    </VBox>
                                 </children>
-                            </VBox>
-                        </bottom>
+                            </HBox>
+                            <HBox maxHeight="Infinity" prefHeight="-Infinity" maxWidth="Infinity" prefWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171"
+                                  xmlns:fx="http://javafx.com/fxml/1">
+                                <children>
+                                    <VBox fx:id="tutoriallist" spacing="5"
+                                          xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
+                                        <padding>
+                                            <Insets top="10" right="10" bottom="10" left="10" />
+                                        </padding>
+                                        <StackPane fx:id="tutorialListPanelPlaceholder" maxHeight="Infinity" prefWidth="-Infinity" VBox.vgrow="ALWAYS"/>
+                                    </VBox>
+                                </children>
+                            </HBox>
+                            <HBox maxHeight="Infinity" prefHeight="-Infinity" maxWidth="Infinity" prefWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171"
+                                  xmlns:fx="http://javafx.com/fxml/1">
+                                <children>
+                                    <VBox fx:id="personList" spacing="5"
+                                          xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
+                                        <padding>
+                                            <Insets top="10" right="10" bottom="10" left="10" />
+                                        </padding>
+                                        <StackPane fx:id="personListPanelPlaceholder" maxHeight="Infinity" prefWidth="-Infinity" VBox.vgrow="ALWAYS"/>
+                                    </VBox>
+                                </children>
+                            </HBox>
+                        </items>
+                    </SplitPane>
+                </center>
+                <bottom>
+                    <VBox prefHeight="111.0" prefWidth="604.0" BorderPane.alignment="CENTER">
+                        <children>
+                            <StackPane fx:id="resultDisplayPlaceholder" minHeight="140" prefHeight="140.0"
+                                       prefWidth="200.0" VBox.vgrow="NEVER"/>
+                            <StackPane fx:id="commandBoxPlaceholder" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="NEVER"/>
+                        </children>
+                    </VBox>
+                </bottom>
                 <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
             </BorderPane>
         </Scene>
