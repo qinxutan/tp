@@ -12,8 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.BorderPane?>
-
 <?import javafx.scene.layout.HBox?>
+
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="Address App" minWidth="0" minHeight="0" onCloseRequest="#handleExit">
     <icons>
@@ -28,6 +28,7 @@
             <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                         xmlns="http://javafx.com/javafx/8.0.171"
                         xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
+         
                         <top>
                             <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
                                 <Menu mnemonicParsing="false" text="File">
@@ -41,7 +42,7 @@
                         <center>
                             <SplitPane dividerPositions="0.33, 0.67"  HBox.hgrow="ALWAYS" prefHeight="-1" prefWidth="-1">
                                 <items>
-                                    <HBox maxHeight="Infinity" prefHeight="-Infinity" maxWidth="Infinity" prefWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171"
+                                  <HBox maxHeight="Infinity" prefHeight="-Infinity" maxWidth="Infinity" prefWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171"
                                           xmlns:fx="http://javafx.com/fxml/1">
                                         <children>
                                             <VBox fx:id="moduleList" spacing="5"
@@ -77,6 +78,7 @@
                                             </VBox>
                                         </children>
                                     </HBox>
+                                   
                                 </items>
                             </SplitPane>
 
