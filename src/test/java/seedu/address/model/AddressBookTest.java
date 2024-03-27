@@ -4,14 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -84,8 +87,59 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasPersonWithEmail_nullEmail_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasPersonWithEmail(null));
+    }
+    @Test
+    public void hasPersonWithEmail_personInAddressBook_returnsTrue() {
+        addressBook.addPerson(AMY);
+        assertTrue(addressBook.hasPersonWithEmail(AMY.getEmail()));
+    }
+
+    @Test
+    public void hasPersonWithEmail_personNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasPersonWithEmail(AMY.getEmail()));
+    }
+
+    @Test
+    public void hasPersonWithEmail_differentPersonWithSameEmail_returnsTrue() {
+        addressBook.addPerson(AMY);
+        Person alice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_AMY)
+                .build();
+        assertTrue(addressBook.hasPersonWithEmail(alice.getEmail()));
+    }
+
+    @Test
+    public void hasPersonWithStudentId_nullStudentId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasPersonWithStudentId(null));
+    }
+    @Test
+    public void hasPersonWithStudentId_personInAddressBook_returnsTrue() {
+        addressBook.addPerson(AMY);
+        assertTrue(addressBook.hasPersonWithStudentId(AMY.getStudentId()));
+    }
+
+    @Test
+    public void hasPersonWithStudentId_personNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasPersonWithStudentId(AMY.getStudentId()));
+    }
+
+    @Test
+    public void hasPersonWithStudentId_differentPersonWithSameStudentId_returnsTrue() {
+        addressBook.addPerson(AMY);
+        Person alice = new PersonBuilder(ALICE).withStudentId(VALID_STUDENT_ID_AMY)
+                .build();
+        assertTrue(addressBook.hasPersonWithStudentId(alice.getStudentId()));
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void getSortedPersonList_modifyList_throwsUnsupportedOperationException() {
+
     }
 
     @Test
@@ -99,6 +153,8 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private ObservableList<Person> sortedPersons;
+
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
@@ -111,6 +167,16 @@ public class AddressBookTest {
         @Override
         public ObservableList<ModuleCode> getModuleList() {
             return null;
+        }
+
+        @Override
+        public void setSortedPersonList(Comparator<Person> comparator) {
+            sortedPersons = FXCollections.observableArrayList();
+        }
+
+        @Override
+        public ObservableList<Person> getSortedPersonList() {
+            return sortedPersons;
         }
 
         @Override
