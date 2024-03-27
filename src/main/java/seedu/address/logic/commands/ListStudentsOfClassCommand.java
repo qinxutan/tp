@@ -1,51 +1,61 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALCLASS;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.TutorialClass;
-import seedu.address.model.person.Person;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A command to list all students of a particular tutorial class.
  */
 public class ListStudentsOfClassCommand extends Command {
 
-    public static final String COMMAND_WORD = "/list_students_of_class";
-    public static final String MESSAGE_EMPTY = "No classes available!";
+    public static final String COMMAND_WORD = "/class_list_students";
+    public static final String MESSAGE_EMPTY = "No students found in the specified tutorial class";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": List students of the tutorial class. \n"
+        + "Parameters: "
+        + PREFIX_MODULECODE + "MODULE CODE "
+        + PREFIX_TUTORIALCLASS + "TUTORIAL CLASS "
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_MODULECODE + "CS2103T "
+        + PREFIX_TUTORIALCLASS + "T09 ";
+
+    private final ModuleCode module;
+    private final TutorialClass tutorialClass;
+
+    /**
+     * Creates a ListStudentsCommand to list students of the specified tutorial class.
+     *
+     * @param module        The module code.
+     * @param tutorialClass The tutorial class.
+     */
+    public ListStudentsOfClassCommand(ModuleCode module, TutorialClass tutorialClass) {
+        requireNonNull(module);
+        this.module = module;
+        this.tutorialClass = tutorialClass;
+    }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        if (model.getAddressBook().getTutorialList().isEmpty()) {
+        ModuleCode existingModule = model.findModuleFromList(module);
+        if (existingModule == null || !existingModule.hasTutorialClass(tutorialClass)) {
+            return new CommandResult(String.format("Module %s or tutorial class %s not found",
+                module, tutorialClass, MESSAGE_EMPTY));
+        }
+        TutorialClass existingTutorialClass = model.findTutorialClassFromList(tutorialClass, module);
+        if (existingTutorialClass.getStudents().isEmpty()) {
             return new CommandResult(MESSAGE_EMPTY);
         }
+
         StringBuilder result = new StringBuilder();
-
-    }
-
-    private List<Person> getStudentsInClass(Model model) throws CommandException {
-        List<Person> allStudents = model.getFilteredPersonList();
-        List<Person> studentsInClass = new ArrayList<>();
-        for (Person student : allStudents) {
-            if (tutorialClass.hasStudent(student)) {
-                studentsInClass.add(student);
-            }
-        }
-        return studentsInClass;
-    }
-
-    private String formatStudentsList(List<Person> students) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Students in ").append(moduleCode).append(" ").append(tutorialClass).append(":\n");
-        for (Person student : students) {
-            stringBuilder.append("- ").append(student.getName()).append("\n");
-        }
-        return stringBuilder.toString().trim();
+        result.append("Module: ").append(module).append(", Tutorial Class: ")
+            .append(tutorialClass).append("\nStudents: ");
+        existingTutorialClass.getStudents().forEach(student -> result.append(student.getName()).append(", "));
+        return new CommandResult(result.toString().trim());
     }
 
     @Override
@@ -57,6 +67,6 @@ public class ListStudentsOfClassCommand extends Command {
             return false;
         }
         ListStudentsOfClassCommand command = (ListStudentsOfClassCommand) other;
-        return moduleCode.equals(command.moduleCode) && tutorialClass.equals(command.tutorialClass);
+        return module.equals(command.module) && tutorialClass.equals(command.tutorialClass);
     }
 }

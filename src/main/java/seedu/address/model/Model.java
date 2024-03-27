@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.TutorialClass;
 import seedu.address.model.person.Person;
@@ -73,7 +74,7 @@ public interface Model {
      * @param tutorialClass to be searched
      * @param moduleCode    to be searched
      */
-    TutorialClass findTutorialClassFromList(TutorialClass tutorialClass, ModuleCode moduleCode);
+    TutorialClass findTutorialClassFromList(TutorialClass tutorialClass, ModuleCode moduleCode) throws CommandException;
 
     /**
      * Deletes the given person.
