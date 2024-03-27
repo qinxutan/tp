@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.INDEX_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.AddTeamCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteClassCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteModuleCommand;
 import seedu.address.logic.commands.DeleteTeamCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -39,6 +41,9 @@ import seedu.address.logic.commands.addstudenttoclasscommands.AddStudentToClassB
 import seedu.address.logic.commands.addstudenttoclasscommands.AddStudentToClassCommand;
 import seedu.address.logic.commands.deletestudentcommands.DeleteStudentByIdCommand;
 import seedu.address.logic.commands.deletestudentcommands.DeleteStudentCommand;
+import seedu.address.logic.commands.deletestudentfromclasscommands.DeleteStudentFromClassByEmailCommand;
+import seedu.address.logic.commands.deletestudentfromclasscommands.DeleteStudentFromClassByIdCommand;
+import seedu.address.logic.commands.deletestudentfromclasscommands.DeleteStudentFromClassCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.TutorialClass;
@@ -82,7 +87,7 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_ONE + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -134,6 +139,16 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_deleteModule() throws Exception {
+        final String moduleCode = "CS2103T";
+        DeleteModuleCommand command = (DeleteModuleCommand) parser.parseCommand(DeleteModuleCommand.COMMAND_WORD + " "
+                + PREFIX_MODULECODE + moduleCode);
+        assertEquals(new DeleteModuleCommand(new ModuleCode(moduleCode)), command);
+    }
+
+
+
+    @Test
     public void parseCommand_listClasses() throws Exception {
         assertTrue(parser.parseCommand(ListClassesCommand.COMMAND_WORD) instanceof ListClassesCommand);
         assertTrue(parser.parseCommand(ListClassesCommand.COMMAND_WORD + " 3") instanceof ListClassesCommand);
@@ -161,6 +176,29 @@ public class AddressBookParserTest {
 
     }
 
+    @Test
+    public void parseCommand_deleteStudentFromClass() throws Exception {
+        final String moduleCode = "CS2103T";
+        final String tutorialClass = "T09";
+        final String email = VALID_EMAIL_AMY;
+        final String id = VALID_STUDENT_ID_AMY;
+        final Index index = INDEX_FIRST_PERSON;
+        DeleteStudentFromClassCommand deleteByEmailCommand = (DeleteStudentFromClassCommand) parser.parseCommand(
+                DeleteStudentFromClassCommand.COMMAND_WORD + " "
+                        + PREFIX_EMAIL + email + " " + PREFIX_MODULECODE
+                        + moduleCode + " " + PREFIX_TUTORIALCLASS + tutorialClass);
+
+        DeleteStudentFromClassCommand deleteByIdCommand = (DeleteStudentFromClassCommand) parser.parseCommand(
+                DeleteStudentFromClassCommand.COMMAND_WORD + " "
+                        + PREFIX_STUDENTID + id + " " + PREFIX_MODULECODE
+                        + moduleCode + " " + PREFIX_TUTORIALCLASS + tutorialClass);
+
+        assertEquals(new DeleteStudentFromClassByEmailCommand(new Email(VALID_EMAIL_AMY),
+                new ModuleCode(moduleCode), new TutorialClass(tutorialClass)), deleteByEmailCommand);
+
+        assertEquals(new DeleteStudentFromClassByIdCommand(new StudentId(VALID_STUDENT_ID_AMY),
+                new ModuleCode(moduleCode), new TutorialClass(tutorialClass)), deleteByIdCommand);
+    }
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class,
