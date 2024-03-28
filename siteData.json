@@ -53,6 +53,8 @@
         "implementation": "Implementation",
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
         "proposed-data-archiving": "[Proposed] Data archiving",
+        "implemented-searching-for-students": "[Implemented] Searching for students",
+        "design-considerations-2": "Design considerations:",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
@@ -108,6 +110,8 @@
       "title": "User Guide",
       "headings": {
         "tahelper-user-guide": "TAHelper User Guide",
+        "target-audience": "Target Audience",
+        "purpose-of-user-guide": "Purpose of User Guide",
         "quick-start": "Quick start",
         "features": "Features",
         "adding-new-students-add-student": "Adding new students : add_student",
