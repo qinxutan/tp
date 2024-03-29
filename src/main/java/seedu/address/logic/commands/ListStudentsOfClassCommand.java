@@ -15,7 +15,7 @@ import seedu.address.model.module.TutorialClass;
 public class ListStudentsOfClassCommand extends Command {
 
     public static final String COMMAND_WORD = "/class_list_students";
-    public static final String MESSAGE_EMPTY = "No students found in the specified tutorial class";
+    public static final String MESSAGE_STUDENT_LIST_EMPTY = "No students found in the specified tutorial class";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List students of the tutorial class. \n"
         + "Parameters: "
         + PREFIX_MODULECODE + "MODULE CODE "
@@ -44,11 +44,11 @@ public class ListStudentsOfClassCommand extends Command {
         ModuleCode existingModule = model.findModuleFromList(module);
         if (existingModule == null || !existingModule.hasTutorialClass(tutorialClass)) {
             return new CommandResult(String.format("Module %s or tutorial class %s not found",
-                module, tutorialClass, MESSAGE_EMPTY));
+                module, tutorialClass, MESSAGE_STUDENT_LIST_EMPTY));
         }
         TutorialClass existingTutorialClass = model.findTutorialClassFromList(tutorialClass, module);
         if (existingTutorialClass.getStudents().isEmpty()) {
-            return new CommandResult(MESSAGE_EMPTY);
+            return new CommandResult(MESSAGE_STUDENT_LIST_EMPTY);
         }
 
         StringBuilder result = new StringBuilder();
