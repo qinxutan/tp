@@ -407,6 +407,104 @@ Step 6. Finally, a `CommandResult` is created and the new filtered is displayed 
   - Pros: Users can filter searches to a higher degree
   - Cons: Handling combinations of different fields could be complex
 
+### \[Implemented\] Add class
+
+The implementation of adding a class is facilitated by the `AddClassCommand` and `AddClassCommandParser`. `AddClassCommandParser` implements the `Parser` interface and it's operations. `AddClassCommand` extends the
+`Command` class and contains auxillary operations that supports the mechanism.
+
+Given below is an example usage scenario and how the add mechanism behaves at each step.
+
+Example: `/add_class module/CS2103T tutorial/T09
+
+<puml src="diagrams/AddClassSequence.puml" alt="AddClassSequence" />`
+
+Execution steps:
+Step 1. The user inputs and executes `/add_class module/CS2103T tutorial/T09` command to add a student with module `CS2103T`, along with
+a unique tutorial `T09`
+
+The `execute` command calls `AddressBookParser#parseCommand()`, which extracts the command word of the command and the arguments of the command.
+
+Step 2. The `AddressBookParser` then creates a new `AddClassCommandParser` and calls `AddClassCommandParser#parse()`, with `module/CS2103T`, `tutorial/T09` as the arguments for the function.
+
+Step 3. The `AddClassCommandParser` parses the arguments and get the values of the user input associated with the prefixes, from there determine the tutorial of the module to add.
+
+<box type="info" seamless>
+
+**Important Note:** All fields must be specified. There must be a valid value for module and tutorial.
+Additionally, module and tutorial must be unique compared to the values already present in the system to get achieve a sucessful add.
+Tags here are optional and need not be specified.
+
+</box>
+
+Step 4. Based on the prefixes, `AddClassCommandParser` creates an `AddClassCommand` object. Each command contains all the required prefixes and values to used to create the command object.
+
+Step 5. `LogicManager` calls `AddClassCommand#execute()`, passing `Model` as an argument. This method retrieves the adds the student to the TAHelper system.
+Throughout the process, error handling (e.g checking for duplicate email or id, making sure references passed are not null) is utilised to mitigate potential errors and ensure valid execution.
+
+Step 6. Finally, a `CommandResult` is created and the student is added to the TAHelper system.
+
+#### Design considerations:
+
+**Aspect: Modularity and extensibility:**
+
+- **Alternative 1 (current choice):** A unique module code and tutorial class is required when adding classes into the TAHelper system, as well as user have to specify all fields, module code and tutorial class in order to add a new class successfully.
+    - Pros: Ensures that all classes are unique and not repeated. This helps facilitate other commands such as add student to classes to find a match in class easily without duplicates.
+    - Cons: Users may inadvertently provide incorrect or non-existent module codes or tutorial class identifiers, leading to errors in the system. This could result in frustration and a poor user experience.
+  
+* **Alternative 2:** Allow user to spcify only the module code when adding classes
+    - Pros: Users can add classes without needing to specify the tutorial class immediately, allowing for greater flexibility in the workflow. They can add the class first and then specify the tutorial class later, as needed. The input process is also streamlined, reducing the burden on users. This simplicity can lead to faster data entry and a more intuitive user experience.
+    - Cons: Users may inadvertently create duplicate classes if they do not specify the tutorial class identifier accurately or if they forget to add it later. This could result in redundancy and inconsistencies within the system.
+
+### \[Implemented\] Delete class
+
+The implementation of adding a class is facilitated by the `DeleteClassCommand` and `DeleteClassCommandParser`. `DeleteClassCommandParser` implements the `Parser` interface and it's operations. `DeleteClassCommand` extends the
+`Command` class and contains auxillary operations that supports the mechanism.
+
+Given below is an example usage scenario and how the add mechanism behaves at each step.
+
+Example: `/delete_class module/CS2103T tutorial/T09
+
+<puml src="diagrams/AddClassSequence.puml" alt="AddClassSequence" />`
+
+Execution steps:
+Step 1. The user inputs and executes `/add_class module/CS2103T tutorial/T09` command to add a student with module `CS2103T`, along with
+a unique tutorial `T09`
+
+The `execute` command calls `AddressBookParser#parseCommand()`, which extracts the command word of the command and the arguments of the command.
+
+Step 2. The `AddressBookParser` then creates a new `AddClassCommandParser` and calls `AddClassCommandParser#parse()`, with `module/CS2103T`, `tutorial/T09` as the arguments for the function.
+
+Step 3. The `AddClassCommandParser` parses the arguments and get the values of the user input associated with the prefixes, from there determine the tutorial of the module to add.
+
+<box type="info" seamless>
+
+**Important Note:** All fields must be specified. There must be a valid value for module and tutorial.
+Additionally, module and tutorial must be unique compared to the values already present in the system to get achieve a sucessful add.
+Tags here are optional and need not be specified.
+
+</box>
+
+Step 4. Based on the prefixes, `AddClassCommandParser` creates an `AddClassCommand` object. Each command contains all the required prefixes and values to used to create the command object.
+
+Step 5. `LogicManager` calls `AddClassCommand#execute()`, passing `Model` as an argument. This method retrieves the adds the student to the TAHelper system.
+Throughout the process, error handling (e.g checking for duplicate email or id, making sure references passed are not null) is utilised to mitigate potential errors and ensure valid execution.
+
+Step 6. Finally, a `CommandResult` is created and the student is added to the TAHelper system.
+
+#### Design considerations:
+
+**Aspect: Modularity and extensibility:**
+
+- **Alternative 1 (current choice):** A unique module code and tutorial class is required when adding classes into the TAHelper system, as well as user have to specify all fields, module code and tutorial class in order to add a new class successfully.
+    - Pros: Ensures that all classes are unique and not repeated. This helps facilitate other commands such as add student to classes to find a match in class easily without duplicates.
+    - Cons: Users may inadvertently provide incorrect or non-existent module codes or tutorial class identifiers, leading to errors in the system. This could result in frustration and a poor user experience.
+
+* **Alternative 2:** Allow user to spcify only the module code when adding classes
+    - Pros: Users can add classes without needing to specify the tutorial class immediately, allowing for greater flexibility in the workflow. They can add the class first and then specify the tutorial class later, as needed. The input process is also streamlined, reducing the burden on users. This simplicity can lead to faster data entry and a more intuitive user experience.
+    - Cons: Users may inadvertently create duplicate classes if they do not specify the tutorial class identifier accurately or if they forget to add it later. This could result in redundancy and inconsistencies within the system.
+
+
+
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
