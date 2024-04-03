@@ -64,7 +64,7 @@ activate Model
 
 Model --> DeleteTeamCommand : "T09"
 DeleteTeamCommand -> Model : tutorialClass.deleteTeam("Team 1")
-deactivate DeleteTeamCommand
+deactivate Model
 
 create CommandResult
 DeleteTeamCommand -> CommandResult

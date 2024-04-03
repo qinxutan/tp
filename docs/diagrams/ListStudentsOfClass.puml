@@ -61,7 +61,6 @@ Model --> ListStudentsOfClassCommand
 deactivate Model
 
 ListStudentsOfClassCommand --> ListStudentsOfClassCommand : getStudents()
-deactivate ListStudentsOfClassCommand
 
 create CommandResult
 ListStudentsOfClassCommand -> CommandResult

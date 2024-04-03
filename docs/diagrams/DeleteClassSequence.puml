@@ -59,10 +59,10 @@ DeleteClassCommand -> Model : existingModule.deleteTutorialClass("T09"")
 deactivate Model
 
 DeleteClassCommand --> DeleteClassCommand : deleteClass(existingModule, "T09")
-deactivate DeleteClassCommand
 
 create CommandResult
 DeleteClassCommand -> CommandResult
+deactivate DeleteClassCommand
 activate CommandResult
 
 CommandResult --> DeleteClassCommand

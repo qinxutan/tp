@@ -29,7 +29,6 @@ ListClassesCommand -> Model :AddressBook.getModuleList()
 deactivate Model
 
 ListClassesCommand --> ListClassesCommand : getTutorialClasses()
-deactivate ListClassesCommand
 
 CommandResult --> ListClassesCommand
 deactivate CommandResult
