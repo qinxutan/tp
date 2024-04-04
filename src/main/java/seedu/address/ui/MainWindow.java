@@ -18,6 +18,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteClassCommand;
 import seedu.address.logic.commands.ListClassesCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
+import seedu.address.logic.commands.SearchStudentCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.sortstudentcommands.SortStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -151,11 +152,15 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getAddressBook().getSortedPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
-
     private void displayAllPersonListPanel() {
         personListPanel = new PersonListPanel(logic.getAddressBook().getPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
+    private void switchToSearchPersonListPanel() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
 
     /**
      * Sets the default size based on {@code guiSettings}.
@@ -227,6 +232,13 @@ public class MainWindow extends UiPart<Stage> {
         String commandWord = commandText.split(" ")[0];
         return commandWord.equals(ListStudentsCommand.COMMAND_WORD);
     }
+    /**
+     * Returns true if the command requires search result view.
+     */
+    public static boolean searchStudentView(String commandText) {
+        String commandWord = commandText.split(" ")[0];
+        return commandWord.equals(SearchStudentCommand.COMMAND_WORD);
+    }
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
@@ -255,6 +267,9 @@ public class MainWindow extends UiPart<Stage> {
             }
             if (allStudentView(commandText)) {
                 displayAllPersonListPanel();
+            }
+            if (searchStudentView(commandText)) {
+                switchToSearchPersonListPanel();
             }
             return commandResult;
         } catch (CommandException | ParseException e) {
