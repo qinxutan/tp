@@ -106,7 +106,7 @@ public class ViewTeamCommand extends Command {
             studentsString = studentsString.substring(0, studentsString.length() - 2);
         }
 
-        return new CommandResult("Team Name: " + teamToView.getTeamName() + ", Team Size: "
+        return new CommandResult("Team Name: " + teamToView.getTeamName() + ", Team Capacity: "
             + teamToView.getTeamSize() + ", Students: " + studentsString);
     }
 
