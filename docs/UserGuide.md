@@ -118,15 +118,15 @@ Commands on students:
 
 Commands on modules:
 
-   - `/add_class module/CS2103T class/T09` : Adds a new tutorial class `T09` under the module `2103T`.
+   - `/add_class module/CS2103T tutorial/T09` : Adds a new tutorial class `T09` under the module `2103T`.
 
-   - `/delete_class module/CS2103T class/T09` : Deletes a tutorial class `T09` under the module `CS2103T`.
+   - `/delete_class module/CS2103T tutorial/T09` : Deletes a tutorial class `T09` under the module `CS2103T`.
 
    - `/list_classes` : List of all tutorial classes available.
 
-   - `/class_list_students module/CS2103T class/T09` : List all the students in the tutorial class `T09` under the module `CS2103T`
+   - `/class_list_students module/CS2103T tutorial/T09` : List all the students in the tutorial class `T09` under the module `CS2103T`
    
-   - `/view_teams name/Team 1 module/CS2103T class/T09` or `/view_teams index/1 module/CS2103T class/T09` : View the information of the team with team name `Team 1` or index `1` in tutorial class `T09` under module `CS2103T`
+   - `/view_teams name/Team 1 module/CS2103T tutorial/T09` or `/view_teams index/1 module/CS2103T tutorial/T09` : View the information of the team with team name `Team 1` or index `1` in tutorial class `T09` under module `CS2103T`
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -481,7 +481,7 @@ Examples:
 
 View the list of all students available
 
-Format: `/class_list_student module/MODULE_CODE class/TUTORIAL_CLASS`
+Format: `/class_list_student module/MODULE_CODE tutorial/TUTORIAL_CLASS`
 
 - If the module code does not exist, it returns an error.
 - If the tutorial class within that module code does not exist, it returns an error.
@@ -491,14 +491,14 @@ The command will display the list of all students along with their student infor
 
 Example:
 
-- `class_list_students module/CS2103T class/T09`
-- `class_list_students module/CS2101 class/T01`
+- `class_list_students module/CS2103T tutorial/T09`
+- `class_list_students module/CS2101 tutorial/T01`
 
 ### View a team in a tutorial class : `view_teams`
 
 View the information about a team in a tutorial class.
 
-Format: `/view_teams [name/TEAM_NAME] [index/INDEX] module/MODULE_CODE class/TUTORIAL_CLASS`
+Format: `/view_teams name/TEAM_NAME module/MODULE_CODE tutorial/TUTORIAL_CLASS` or `/view_teams index/INDEX module/MODULE_CODE tutorial/TUTORIAL_CLASS`
 
 - If the module code does not exist, it returns an error message.
 - If the tutorial class within that module code does not exist, it returns an error message.
