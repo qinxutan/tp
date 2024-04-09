@@ -14,11 +14,22 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.AddClassCommand;
+import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.AddTeamCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteClassCommand;
+import seedu.address.logic.commands.DeleteModuleCommand;
+import seedu.address.logic.commands.DeleteTeamCommand;
 import seedu.address.logic.commands.ListClassesCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
+import seedu.address.logic.commands.ListStudentsOfClassCommand;
+import seedu.address.logic.commands.RandomTeamAllocationCommand;
 import seedu.address.logic.commands.SearchStudentCommand;
+import seedu.address.logic.commands.ViewTeamCommand;
+import seedu.address.logic.commands.addstudenttoclasscommands.AddStudentToClassCommand;
+import seedu.address.logic.commands.allocatestudenttoteamcommands.AllocateStudentToTeamCommand;
+import seedu.address.logic.commands.deletestudentcommands.DeleteStudentCommand;
+import seedu.address.logic.commands.deletestudentfromclasscommands.DeleteStudentFromClassCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.sortstudentcommands.SortStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -161,6 +172,16 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
+    private void listStudentsOfClassPanel() {
+        personListPanel = new PersonListPanel(logic.getAddressBook().getStudentsInTutorialClassList());
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+    private void listStudentsOfTeamPanel() {
+        personListPanel = new PersonListPanel(logic.getAddressBook().getStudentsInTeamList());
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
 
     /**
      * Sets the default size based on {@code guiSettings}.
@@ -215,7 +236,32 @@ public class MainWindow extends UiPart<Stage> {
         String commandWord = commandText.split(" ")[0];
         return commandWord.equals(ListClassesCommand.COMMAND_WORD)
             || commandWord.equals(AddClassCommand.COMMAND_WORD)
-            || commandWord.equals(DeleteClassCommand.COMMAND_WORD);
+            || commandWord.equals(DeleteClassCommand.COMMAND_WORD)
+            || commandWord.equals(DeleteModuleCommand.COMMAND_WORD);
+    }
+    /**
+     * Returns true if the command requires person view and
+     * false if the command does not.
+     *
+     * @return true if command requires person view
+     */
+    public static boolean usePersonView(String commandText) {
+        String commandWord = commandText.split(" ")[0];
+        return commandWord.equals(AddStudentCommand.COMMAND_WORD)
+            || commandWord.equals(DeleteStudentCommand.COMMAND_WORD);
+    }
+    /**
+     * Returns true if the command requires tutorial view and
+     * false if the command does not.
+     *
+     * @return true if command requires tutorial view
+     */
+
+    public static boolean useTutorialView(String commandText) {
+        String commandWord = commandText.split(" ")[0];
+        return commandWord.equals(AddTeamCommand.COMMAND_WORD)
+            || commandWord.equals(DeleteTeamCommand.COMMAND_WORD)
+            || commandWord.equals(RandomTeamAllocationCommand.COMMAND_WORD);
     }
 
     /**
@@ -239,7 +285,23 @@ public class MainWindow extends UiPart<Stage> {
         String commandWord = commandText.split(" ")[0];
         return commandWord.equals(SearchStudentCommand.COMMAND_WORD);
     }
-
+    /**
+     * Returns true if the command requires the list of students in tutorial class view.
+     */
+    public static boolean listStudentOfTutorialClassView(String commandText) {
+        String commandWord = commandText.split(" ")[0];
+        return commandWord.equals(ListStudentsOfClassCommand.COMMAND_WORD)
+            || commandWord.equals(AddStudentToClassCommand.COMMAND_WORD)
+            || commandWord.equals(DeleteStudentFromClassCommand.COMMAND_WORD);
+    }
+    /**
+     * Returns true if the command requires the list of students in tutorial team view.
+     */
+    public static boolean listStudentOfTeamView(String commandText) {
+        String commandWord = commandText.split(" ")[0];
+        return commandWord.equals(ViewTeamCommand.COMMAND_WORD)
+            || commandWord.equals(AllocateStudentToTeamCommand.COMMAND_WORD);
+    }
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -270,6 +332,26 @@ public class MainWindow extends UiPart<Stage> {
             }
             if (searchStudentView(commandText)) {
                 switchToSearchPersonListPanel();
+            }
+            if (listStudentOfTutorialClassView(commandText)) {
+                listStudentsOfClassPanel();
+            }
+            if (listStudentOfTeamView(commandText)) {
+                listStudentsOfTeamPanel();
+            }
+            if (usePersonView(commandText)) {
+                personListPanel = new PersonListPanel(logic.getAddressBook().getPersonList());
+                personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            }
+            if (useModuleView(commandText)) {
+                moduleListPanel = new ModuleListPanel(logic.getAddressBook().getModuleList(),
+                    this::handleModuleCardClicked);
+                moduleListPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
+            }
+            if (useTutorialView(commandText)) {
+                tutorialListPanel = new TutorialListPanel(logic.getAddressBook().getTutorialList(),
+                    this::handleTutorialCardClicked, personListPanel);
+                tutorialListPanelPlaceholder.getChildren().add(tutorialListPanel.getRoot());
             }
             return commandResult;
         } catch (CommandException | ParseException e) {

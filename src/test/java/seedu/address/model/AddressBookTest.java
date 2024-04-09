@@ -240,8 +240,23 @@ public class AddressBookTest {
         }
 
         @Override
+        public void setStudentsInTutorialClass(TutorialClass tutorialClass) {
+
+        }
+
+        @Override
+        public ObservableList<Person> getStudentsInTutorialClassList() {
+            return null;
+        }
+
+        @Override
         public ObservableList<TutorialTeam> getTutorialTeamList() {
             return null;
+        }
+
+        @Override
+        public void setStudentsInTeam(TutorialTeam tutorialTeam) {
+
         }
     }
 }

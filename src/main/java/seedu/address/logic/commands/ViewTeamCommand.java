@@ -106,7 +106,7 @@ public class ViewTeamCommand extends Command {
         if (studentsString.length() > 2) {
             studentsString = studentsString.substring(0, studentsString.length() - 2);
         }
-
+        model.getAddressBook().setStudentsInTeam(teamToView);
         return new CommandResult("Team Name: " + teamToView.getTeamName() + ", Team Capacity: "
             + teamToView.getTeamSize() + ", Students: " + studentsString);
     }
