@@ -32,6 +32,14 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<ModuleCode> getModuleList();
 
+    void setTutorialClassesInModules(ModuleCode moduleCode);
+
+    ObservableList<TutorialClass> getTutorialClassInModules();
+
+    void setTutorialTeamsInClass(TutorialClass tutorialClass);
+
+    ObservableList<TutorialTeam> getUiTutorialTeamList();
+
     void setSortedPersonList(Comparator<Person> comparator);
     ObservableList<Person> getSortedPersonList();
     ObservableList<TutorialTeam> getTutorialTeamList();

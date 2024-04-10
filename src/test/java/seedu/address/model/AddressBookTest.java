@@ -197,6 +197,26 @@ public class AddressBookTest {
         }
 
         @Override
+        public void setTutorialClassesInModules(ModuleCode moduleCode) {
+
+        }
+
+        @Override
+        public ObservableList<TutorialClass> getTutorialClassInModules() {
+            return null;
+        }
+
+        @Override
+        public void setTutorialTeamsInClass(TutorialClass tutorialClass) {
+
+        }
+
+        @Override
+        public ObservableList<TutorialTeam> getUiTutorialTeamList() {
+            return null;
+        }
+
+        @Override
         public void setSortedPersonList(Comparator<Person> comparator) {
             sortedPersons = FXCollections.observableArrayList();
         }

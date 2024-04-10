@@ -36,6 +36,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private ObservableList<Person> studentsInTeam;
     private ObservableList<Person> studentsInClass;
+    private ObservableList<TutorialTeam> tutorialTeamsList;
+    private ObservableList<TutorialClass> tutorialClassInModules;
 
 
     /*
@@ -401,6 +403,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<TutorialTeam> getTeamList() {
         return FXCollections.observableList(tutorialTeams);
+    }
+    @Override
+    public void setTutorialClassesInModules(ModuleCode moduleCode) {
+        tutorialClassInModules = FXCollections.observableArrayList(moduleCode.getTutorialClasses());
+    }
+    @Override
+    public ObservableList<TutorialClass> getTutorialClassInModules() {
+        return tutorialClassInModules;
+    }
+    @Override
+    public void setTutorialTeamsInClass(TutorialClass tutorialClass) {
+        tutorialTeamsList = FXCollections.observableArrayList(tutorialClass.getTeams());
+    }
+    @Override
+    public ObservableList<TutorialTeam> getUiTutorialTeamList() {
+        return tutorialTeamsList;
     }
     @Override
     public void setSortedPersonList(Comparator<Person> comparator) {

@@ -16,10 +16,12 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.AddClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddTeamCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteClassCommand;
 import seedu.address.logic.commands.DeleteModuleCommand;
 import seedu.address.logic.commands.DeleteTeamCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ListClassesCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
 import seedu.address.logic.commands.ListStudentsOfClassCommand;
@@ -225,7 +227,16 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         primaryStage.hide();
     }
-
+    /**
+     * Returns true if the command requires is clear command and
+     * false if the command does not.
+     *
+     * @return true if command is clear command
+     */
+    public static boolean useClearView(String commandText) {
+        String commandWord = commandText.split(" ")[0];
+        return commandWord.equals(ClearCommand.COMMAND_WORD);
+    }
     /**
      * Returns true if the command requires module view and
      * false if the command does not.
@@ -248,7 +259,8 @@ public class MainWindow extends UiPart<Stage> {
     public static boolean usePersonView(String commandText) {
         String commandWord = commandText.split(" ")[0];
         return commandWord.equals(AddStudentCommand.COMMAND_WORD)
-            || commandWord.equals(DeleteStudentCommand.COMMAND_WORD);
+            || commandWord.equals(DeleteStudentCommand.COMMAND_WORD)
+            || commandWord.equals(EditCommand.COMMAND_WORD);
     }
     /**
      * Returns true if the command requires tutorial view and
@@ -347,11 +359,24 @@ public class MainWindow extends UiPart<Stage> {
                 moduleListPanel = new ModuleListPanel(logic.getAddressBook().getModuleList(),
                     this::handleModuleCardClicked);
                 moduleListPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
-            }
-            if (useTutorialView(commandText)) {
-                tutorialListPanel = new TutorialListPanel(logic.getAddressBook().getTutorialList(),
+
+                tutorialListPanel = new TutorialListPanel(logic.getAddressBook().getTutorialClassInModules(),
                     this::handleTutorialCardClicked, personListPanel);
                 tutorialListPanelPlaceholder.getChildren().add(tutorialListPanel.getRoot());
+            }
+            if (useTutorialView(commandText)) {
+                tutorialListPanel = new TutorialListPanel(logic.getAddressBook().getTutorialClassInModules(),
+                    this::handleTutorialCardClicked, personListPanel);
+                tutorialListPanelPlaceholder.getChildren().add(tutorialListPanel.getRoot());
+
+                personListPanel = new PersonListPanel(logic.getAddressBook().getStudentsInTeamList());
+                personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+            }
+            if (useClearView(commandText)) {
+                personListPanelPlaceholder.getChildren().clear();
+                moduleListPanelPlaceholder.getChildren().clear();
+                tutorialListPanelPlaceholder.getChildren().clear();
             }
             return commandResult;
         } catch (CommandException | ParseException e) {
