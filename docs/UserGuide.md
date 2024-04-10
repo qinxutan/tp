@@ -508,8 +508,8 @@ The command will display the team with its information. If there is no such exis
 
 Example:
 
-- View team by team name: `/view_teams name/Team 1 module/CS2103T class/T09`
-- View team by index: `/view_teams index/1 module/CS2103T class/T09`
+- View team by team name: `/view_teams name/Team 1 module/CS2103T tutorial/T09`
+- View team by index: `/view_teams index/1 module/CS2103T tutorial/T09`
 
 ---
 
