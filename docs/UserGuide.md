@@ -184,10 +184,7 @@ Commands on modules:
    - `/random_teams module/CS2103T tutorial/T09 teams/4` : Randomly allocates all students in the tutorial class `T09` under the module `CS2103T` into different teams in the tutorial class.
    
    - `/view_teams name/Team 1 module/CS2103T tutorial/T09` or `/view_teams index/1 module/CS2103T tutorial/T09` : View the information of the team with team name `Team 1` or index `1` in tutorial class `T09` under module `CS2103T`
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -494,9 +491,10 @@ Format:
 
 Important Note:
 - The tutorial class needs to be associated with the module specified.
-- The student must be in the team before command execution.
+- The student must be in the class before command execution.
 
-Expected output: `Deleted STUDENT_NAME from MODULE TUTORIAL!`
+Expected output:
+Upon successful allocation of student to the tutorial class, the command will return a confirmation messaging stating that the specified student has been deleted from the class.
 
 Example: `/delete_student_from_class id/A0123456A module/CS2103T tutorial/T09`
 
@@ -513,7 +511,7 @@ Format: `/add_team module/MODULE tutorial/TUTORIAL team/TEAM_NAME [size/TEAM_SIZ
 
 - An optional team size can be specified to apply a size restriction on the team.
 - Team size must be a positive integer. Any invalid inputs (non-numeric, negative integers) returns an error.
-- Two teams are equal if they have the same name and belong to the same tutorial (i.e no tutorial should have more than 1 team with the same name), irregardless of size.
+- Two teams are equal if they have the same name and belong to the same tutorial (i.e no tutorial should have more than 1 team with the same name), regardless of size.
 - If the module code does not exist, it returns an error.
 - If the tutorial class within that module code does not exist, it returns an error.
 - If the team already exists in that tutorial class, it returns an error.
@@ -539,6 +537,9 @@ Format: `/delete_team module/MODULE tutorial/TUTORIAL team/TEAM_NAME`
 - If the module code does not exist, it returns an error message.
 - If the tutorial class within that module code does not exist, it returns an error.
 - If the team within that tutorial class does not exist, it returns an error. 
+
+Expected output:
+Upon successful addition, the command will return a confirmation messaging stating that the specified team has been deleted.
 
 Examples:
 
@@ -615,13 +616,9 @@ Example:
 
 View the information about a team in a tutorial class.
 
-<<<<<<< HEAD
-Format: `/view_teams name/TEAM_NAME module/MODULE_CODE tutorial/TUTORIAL_CLASS` or `/view_teams index/INDEX module/MODULE_CODE tutorial/TUTORIAL_CLASS`
-=======
 Format: 
 1. By team name: `/view_teams name/TEAM_NAME module/MODULE tutorial/TUTORIAL`
 2. By index: `/view_teams index/INDEX module/MODULE tutorial/TUTORIAL`
->>>>>>> origin/master
 
 - If the module code does not exist, it returns an error message.
 - If the tutorial class within that module code does not exist, it returns an error message.
@@ -635,11 +632,8 @@ Example:
 
 - View team by team name: `/view_teams name/Team 1 module/CS2103T tutorial/T09`
 - View team by index: `/view_teams index/1 module/CS2103T tutorial/T09`
-<<<<<<< HEAD
-=======
 
 [Back to table of contents](#table-of-contents)
->>>>>>> origin/master
 
 ---
 ### Randomly allocate into teams all students in a tutorial class : `random_teams`
@@ -683,7 +677,8 @@ Important Note:
 - The tutorial class needs to be associated with the module specified.
 - As of now, the team related error messages may sometimes add `Team` before the team name, which might lead to confusion. To clarify this, for all purposes, the team name is stored as the exact name you give, and the word `Team` is not appended to it. As such, if you created the team with team name `1`, you need to use `delete_student_from_team` with team name `1` and not `Team 1`.
 
-Expected output: `Deleted STUDENT_NAME from MODULE TUTORIAL, Team TEAM_NAME`
+Expected output:
+Upon a successful randomisation, the command will return a confirmation message stating that the students in the specified student has been deleted from the team.
 
 Example: `/delete_student_from_team id/A0123456A module/CS2103T tutorial/T09 team/4`
 must be in the team before command execution.
